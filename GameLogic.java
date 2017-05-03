@@ -36,7 +36,7 @@ public class GameLogic {
             out.drawField(field.getField());
             out.drawWin(turn);
             return true;
-        }else {
+        } else {
 
             out.wrongPlace ();
             return false;
