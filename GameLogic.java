@@ -1,49 +1,57 @@
 public class GameLogic {
-    Field field = new Field();
-    Output out = new Output();
-    boolean won = false;
 
+    private Field field = new Field();
     private Character turn ='X';
+
+    private boolean win = false;
+    private boolean stale = false;
+
+    public boolean checkGameOver (){
+        return win || stale;
+    }
 
 
     public void newGame (){
+        win = false;
+        stale = false;
         turn = 'X';
-        this.won = false;
-        field.clearField();
-        out.drawField(field.getField());
+        field = new Field();
+        View.drawTurn(turn);
+        View.drawField(field.getField());
+    }
+    public Field getField (){
+        return field;
     }
 
-    public boolean makeNewTurn(int x){
+    public boolean makeTurn(int x){
+        int y = field.placeMark (x,turn);
+        if (y != -1 ){
+            if (checkStale ()){
+                stale = true;
+                View.drawStale();
 
-     
-        String turnResult = field.placeMark(x,turn);
-        if ( turnResult.equals("placed")) {
-          
-            if (turn.equals('X')) {
-                turn = 'O';
-            } else if (turn.equals('O')) {
-                turn = 'X';
+            }
+            if (checkWin(y,x)){
+                win = true;
+                View.drawWin(turn);
             }
 
+            turn = (turn.equals('X')? 'O' : 'X');
+            View.drawTurn(turn);
+            View.drawField(field.getField());
 
-            out.drawTurn(turn);
-            out.drawField(field.getField());
             return true;
-        } else if (turnResult.equals("win")) {
-
-            this.won = true;
-            out.drawTurn(turn);
-            out.drawField(field.getField());
-            out.drawWin(turn);
-            return true;
-        } else {
-
-            out.wrongPlace ();
-            return false;
         }
+
+        return false;
     }
 
-    public boolean getWon () {
-        return this.won;
+    public boolean checkWin (int y, int x){
+        return field.checkWin(y,x);
     }
+
+    public boolean checkStale (){
+        return !field.emptySpaceLeft();
+    }
+
 }
