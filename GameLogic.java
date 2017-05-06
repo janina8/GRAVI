@@ -1,4 +1,3 @@
-package XOGame;
 
 public class GameLogic {
     private Field field= new Field(6,7);
