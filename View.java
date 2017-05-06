@@ -1,4 +1,4 @@
-package XOGame;
+
 
 public class View {
 
