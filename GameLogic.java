@@ -1,24 +1,20 @@
+package XOGame;
+
 public class GameLogic {
-
-    private Field field = new Field();
+    private Field field= new Field(6,7);
     private Character turn ='X';
-
     private boolean win = false;
-    private boolean stale = false;
+
 
     public boolean checkGameOver (){
-        return win || stale;
+        return win || field.checkStale();
     }
 
-
-    public void newGame (){
-        win = false;
-        stale = false;
-        turn = 'X';
-        field = new Field();
+    public void drawFieldAndTurn (){
         View.drawTurn(turn);
-        View.drawField(field.getField());
+        View.drawField(field);
     }
+
     public Field getField (){
         return field;
     }
@@ -26,32 +22,24 @@ public class GameLogic {
     public boolean makeTurn(int x){
         int y = field.placeMark (x,turn);
         if (y != -1 ){
-            if (checkStale ()){
-                stale = true;
-                View.drawStale();
 
+
+            if (field.checkStale ()){
+                View.drawStale();
             }
-            if (checkWin(y,x)){
+            if (field.checkWin(y,x)){
                 win = true;
                 View.drawWin(turn);
             }
 
-            turn = (turn.equals('X')? 'O' : 'X');
-            View.drawTurn(turn);
-            View.drawField(field.getField());
 
+
+            turn = (turn.equals('X')? 'O' : 'X');
+            drawFieldAndTurn();
             return true;
         }
-
         return false;
     }
 
-    public boolean checkWin (int y, int x){
-        return field.checkWin(y,x);
-    }
-
-    public boolean checkStale (){
-        return !field.emptySpaceLeft();
-    }
 
 }
