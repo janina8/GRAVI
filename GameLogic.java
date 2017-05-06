@@ -21,8 +21,6 @@ public class GameLogic {
     public boolean makeTurn(int x){
         int y = field.placeMark (x,turn);
         if (y != -1 ){
-
-
             if (field.checkStale ()){
                 View.drawStale();
             }
@@ -30,9 +28,6 @@ public class GameLogic {
                 win = true;
                 View.drawWin(turn);
             }
-
-
-
             turn = (turn.equals('X')? 'O' : 'X');
             drawFieldAndTurn();
             return true;
