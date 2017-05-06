@@ -1,7 +1,9 @@
+package XOGame;
+
 public class View {
 
-    public static void drawField (char[][] field){
-
+    public static void drawField (Field f) {
+        char[][] field = f.getField();
         for (int y=field.length-1; y>=0;y--)
         {
             System.out.println();
@@ -20,10 +22,10 @@ public class View {
         System.out.println ("Turn of "+turn);
     }
 
-
     public static void drawWin (char turn){
-        System.out.println ("Player "+turn+" WINS !!!!");
+        System.out.println ("Player "+turn+" WINS !");
     }
+
     public static void drawStale (){
         System.out.println ("Stale");
     }
@@ -31,5 +33,4 @@ public class View {
     public static void requestGameType () {
         System.out.println ("Press 1 to play PvP, Press any other digit to play PvAi");
     }
-
 }
