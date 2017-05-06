@@ -1,21 +1,18 @@
+package XOGame;
+
 import java.util.Scanner;
 
 public class Controller {
+    private GameLogic gl = new GameLogic();
+    private Ai ai = new Ai();
+    private Scanner sc = new Scanner(System.in);
 
-    GameLogic gl = new GameLogic();
-    Ai ai = new Ai();
-    Scanner sc = new Scanner(System.in);
-
-    Controller (){
-        newGame();
-    }
 
     public void newGame (){
         View.requestGameType();
-
         boolean playWithAi = (sc.nextInt() != 1 );
         boolean placed = false;
-        gl.newGame();
+        gl.drawFieldAndTurn();
         while (!gl.checkGameOver()){
             //human turn
             placed = false;
@@ -30,4 +27,6 @@ public class Controller {
             }
         }
     }
+
+   
 }
