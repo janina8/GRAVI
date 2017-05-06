@@ -23,7 +23,7 @@ public class View {
     }
 
     public static void drawWin (char turn){
-        System.out.println ("Player "+turn+" WINS !");
+        System.out.println ("Player "+turn+" WINS !!!!!111111111");
     }
 
     public static void drawStale (){
