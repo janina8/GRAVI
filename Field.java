@@ -67,7 +67,7 @@ public class Field {
     }
 
     public int placeMark(int x, char mark) {
-   
+ 
         int y = 0;
         while (yxInField(y, x, field)) {
             if (field[y][x] == emptyCell) {
